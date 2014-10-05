@@ -1,0 +1,5 @@
+*.DS_Store
+*.so
+*.pyc
+*.o
+*.lnk
