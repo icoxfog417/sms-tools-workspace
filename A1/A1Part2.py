@@ -23,6 +23,6 @@ def minMaxAudio(inputFile):
         A tuple of the minimum and the maximum value of the audio samples, like: (min_val, max_val)
     """
     ## Your code here
-
-
-    
+    sound_data = wavread(inputFile)
+    samples = sound_data[1]
+    return (samples.min(axis=0), samples.max(axis=0))

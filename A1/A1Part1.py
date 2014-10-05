@@ -32,3 +32,7 @@ def readAudio(inputFile):
     """
         
     ## Your code here
+    sound_data = wavread(inputFile)
+    # about readed data, [0] is sampling rate, and [1] is samples
+    sample_between_50001th_to_50010th = sound_data[1][50000:50010]
+    return sample_between_50001th_to_50010th
