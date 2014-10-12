@@ -33,3 +33,11 @@ def IDFT(X):
         x (numpy array) = The N point IDFT of the frequency spectrum X
     """
     ## Your code here
+    N = len(X)
+    range = np.arange(0, len(X))
+    cSine = lambda nv: np.array([np.exp(2j * np.pi * k * nv / N) for k in range])
+    idft = np.array([])
+    for n in range:
+        idft = np.append(idft, np.inner(X, cSine(n)) / N)
+
+    return idft

@@ -22,4 +22,5 @@ def genMagSpec(x):
                              (length N)
     """
     ## Your code here
-    
+    from A2Part3 import DFT
+    return np.absolute(DFT(x))

@@ -26,3 +26,11 @@ def DFT(x):
         X (numpy array) = The N point DFT of the input sequence x
     """
     ## Your code here
+    N = len(x)
+    range = np.arange(0, len(x))
+    cSine = lambda kv: np.array([np.exp(-2j * np.pi * kv * n / N) for n in range])
+    dft = np.array([])
+    for k in range:
+        dft = np.append(dft, np.inner(x, cSine(k)))
+
+    return dft
