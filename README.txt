@@ -1,1 +1,1 @@
-Empty directory used as a workspace.
+This is an empty directory for you to work from.
