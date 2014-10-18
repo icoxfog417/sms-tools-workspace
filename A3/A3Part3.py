@@ -42,3 +42,17 @@ def testRealEven(x):
         X (numpy array, possibly complex) = The M point DFT of dftbuffer 
     """
     ## Your code here
+    M = x.size
+    hM = (M/2)+1
+    hL = int(math.floor((M+1)/2))
+    hR = int(math.floor(M/2))
+    dftbuffer = np.zeros(M)
+    
+    dftbuffer[:hL] = x[hR:]
+    dftbuffer[-hR:] = x[:hR]
+    X = fft(dftbuffer)
+    is_real = np.real(X)[np.arange(1,hL)] == np.real(X)[np.arange(M-1,hR,-1)]
+    is_imag = np.imag(X[1:M-2]) <  1.0e-6
+    isRealEven = sum(is_real == False) + sum(is_imag == False) == 0
+    
+    return bool(isRealEven), dftbuffer, X

@@ -44,3 +44,10 @@ def minimizeEnergySpreadDFT(x, fs, f1, f2):
                            mX is (M/2)+1 samples long (M is to be computed)
     """
     ## Your code here
+    co_freq = gcd(f1, f2)
+    M = fs * (1.0 / co_freq)
+    X = fft(x[:M])
+    M_h = M / 2 + 1
+    mX = 20 * np.log10(np.abs(X[:M_h]))
+    
+    return mX

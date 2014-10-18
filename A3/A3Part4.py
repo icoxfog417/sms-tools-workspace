@@ -49,3 +49,20 @@ def suppressFreqDFTmodel(x, fs, N):
     The first few lines of the code have been written for you, do not modify it. 
     """
     ## Your code here
+    M = len(x)
+    w = get_window('hamming', M)
+    outputScaleFactor = sum(w)
+    
+    # compute the dft of the sound fragment
+    mX, pX = dftAnal(x, w, N)
+    
+    # compute no-filter
+    y = dftSynth(mX, pX, w.size)*sum(w)
+    
+    # filter magnitude under 70Hz
+    import math
+    bin70 = math.ceil(70.0 * N / fs)
+    mX[:bin70+1] = -120
+    yfilt = dftSynth(mX, pX, w.size)*sum(w)
+    
+    return y, yfilt
