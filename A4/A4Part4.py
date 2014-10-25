@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import math
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
+import stft as STFT
 import utilFunctions as UF
 
 eps = np.finfo(float).eps
@@ -65,3 +65,49 @@ def computeODF(inputFile, window, M, N, H):
     """
     
     ### your code here
+    def energy(mag):
+        e = 10 * np.log10(np.sum((10 ** (mag / 20)) ** 2, axis=1))
+        return e
+
+    def odf(eg):
+        o = eg - np.roll(eg, 1)
+        o[0] = 0
+        o[o <= 0] = 0
+        return o
+
+    (fs, x) = UF.wavread(inputFile)
+    border_bin = int(np.ceil(float(3000) * N / fs))
+    max_bin = int(np.ceil(float(10000) * N / fs))
+    w = get_window(window, M)
+    
+    mX, pX = STFT.stftAnal(x, fs, w, N, H)
+    low = np.transpose(np.transpose(mX)[1:border_bin])
+    high = np.transpose(np.transpose(mX)[border_bin:max_bin])
+    
+    odf_low = odf(energy(low))
+    odf_high = odf(energy(high))    
+    
+    odfs = np.append([odf_low], [odf_high], axis=0)
+    odfs = np.transpose(odfs)
+    
+    # draw graph
+    plt.figure(1, figsize=(9.5, 6))
+
+    plt.subplot(211)
+    numFrames = mX.shape[0]
+    frmTime = H*np.arange(numFrames)/float(fs)
+    binFreq = np.arange(mX.shape[1])*float(fs)/N
+    plt.pcolormesh(frmTime, binFreq, np.transpose(mX))
+    plt.title('mX ({0}), M={1}, N={2}, H={3}'.format(inputFile, M, N, H))
+    plt.autoscale(tight=True)
+    
+    plt.subplot(212)
+    plt.plot(frmTime, odf_low, color="blue", label="row")
+    plt.plot(frmTime, odf_high, color="red", label="high")
+    plt.title('Onset Detection function')
+    plt.autoscale(tight=True)
+
+    plt.tight_layout()
+    plt.show()
+
+    return odfs

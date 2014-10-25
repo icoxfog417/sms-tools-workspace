@@ -47,3 +47,28 @@ def extractMainLobe(window, M):
     """
 
     ### Your code here
+    N = 8 * M
+    hN = N // 2
+    hN_L = N -hN
+    w = get_window(window, M)
+    
+    hM = w.size // 2
+    hM_L = w.size - hM
+    fftbuffer = np.zeros(N)
+    fftbuffer[:hM_L] = w[hM:]
+    fftbuffer[-hM:] = w[:hM]
+    
+    X = fft(fftbuffer)
+    mX = 20 * np.log10(np.absolute(X))
+    mX = np.append(mX[-hN:], mX[:hN_L])
+
+    up_begin = 0
+    for i in range(hN):
+        index = hN_L + i
+        if mX[index] < mX[index + 1]:
+            up_begin = i
+            break
+    
+    result = mX[(hN - up_begin):(hN + up_begin + 1)]
+    
+    return result

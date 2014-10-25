@@ -6,7 +6,7 @@ from scipy.signal import get_window
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
+import stft as STFT
 import utilFunctions as UF
 eps = np.finfo(float).eps
 
@@ -52,3 +52,22 @@ def computeSNR(inputFile, window, M, N, H):
             SNR1 and SNR2 are floats.
     """
     ## your code here
+    def energy(mag):
+        e = np.sum((10 ** (mag / 20)) ** 2)
+        return e
+    
+    (fs, x) = UF.wavread(inputFile)
+    w = get_window(window, M)
+    
+    mX, pX = STFT.stftAnal(x, fs, w, N, H)
+    y = STFT.stftSynth(mX, pX, M, H)
+    n = x - y[:x.size]
+    n2 = x[w.size:-w.size] - y[:x.size][w.size:-w.size]
+    
+    mN, pN = STFT.stftAnal(n, fs, w, N, H)
+    mN2, pN2 = STFT.stftAnal(n2, fs, w, N, H)
+    
+    snr1 = 10 * np.log10(energy(mX) / energy(mN))
+    snr2 = 10 * np.log10(energy(mX) / energy(mN2))
+        
+    return snr1, snr2
