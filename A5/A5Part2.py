@@ -63,8 +63,8 @@ def chirpTracker(inputFile='../../sounds/chirp-150-190-linear.wav'):
            K is the number of frames
     """
     # Analysis parameters: Modify values of the parameters marked XX
-    M = XX                                   # Window size in samples
-    H = XX                                   # Hop size in samples
+    M = 3401                                  # Window size in samples
+    H = 512                                   # Hop size in samples
     
     ### Go through the code below and understand it, do not modify anything ###    
     N = int(pow(2, np.ceil(np.log2(M))))        # FFT Size, power of 2 larger than M
