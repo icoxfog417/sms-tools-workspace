@@ -102,24 +102,47 @@ def segmentStableNotesRegions(inputFile = '../../sounds/sax-phrase-short.wav', s
     fs, x = UF.wavread(inputFile)                               #reading inputFile
     w  = get_window(window, M)                                  #obtaining analysis window    
     f0 = HM.f0Detection(x, fs, w, N, H, t, minf0, maxf0, f0et)  #estimating F0
-
+    
     ### Your code here
-
     # 1. convert f0 values from Hz to Cents (as described in pdf document)
+    f0ct = 1200 * np.log2(f0 / 55.0)    
     
     # 2. create an array containing standard deviation of last winStable samples
-    
+    offset = winStable - 1
+    stds = np.zeros(offset)
+    for i in range(offset, f0ct.size):
+        stds = np.append(stds, np.std(f0ct[i-offset:i+1]))
+        
     # 3. apply threshold on standard deviation values to find indices of the stable points in melody
+    stables = np.where(stds < stdThsld)[0]
     
     # 4. create segments of continuous stable points such that concequtive stable points belong to 
     #    same segment
-
-    # 5. apply segment filtering, i.e. remove segments with are < minNoteDur in length
+    terms = []
+    if len(stables) > 0:
+        sequence = [stables[0]]
+        index = 0
+        for s in stables:
+            if s != (sequence[0] + index):
+                terms.append([sequence[0], sequence[len(sequence) - 1]])
+                sequence = []
+            sequence.append(s)
+            index = len(sequence)
     
+    # 5. apply segment filtering, i.e. remove segments with are < minNoteDur in length
+    terms_fd = []
+    for t in terms:
+        if (t[1] - t[0]) * H / float(fs) >= minNoteDur:
+            terms_fd.append(t)
+
     # plotSpectogramF0Segments(x, fs, w, N, H, f0, segments)
-
+    segments = np.array(terms_fd)
+    plotSpectogramF0Segments(x, fs, w, N, H, f0, segments)
+    
     # return segments
+    return segments
 
+    
 ## Use this function to plot the f0 contour and the estimated segments on the spectrogram
 def plotSpectogramF0Segments(x, fs, w, N, H, f0, segments):
     """

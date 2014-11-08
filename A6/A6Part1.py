@@ -65,13 +65,13 @@ def estimateF0(inputFile = '../../sounds/cello-double-2.wav'):
     """
 
     ### Change these analysis parameter values
-    window = XX
-    M = XX
-    N = XX
-    f0et = XX
-    t = XX
-    minf0 = XX
-    maxf0 = XX
+    window = "blackman"
+    M = 4401
+    N = 8192
+    f0et = 7
+    t = -90.0
+    minf0 = 140
+    maxf0 = 210
 
     ### Do not modify the code below 
     H = 256                                                     #fix hop size
