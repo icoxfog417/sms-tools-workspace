@@ -16,17 +16,17 @@
 ## Question 1. Obtain a good harmonic+stochastic analysis of a speech sound
 
 ### Part 1.1
-(max magnitude(dB), pitch range that seems to be f0, assumption of harmonics count)
+Roughly, pitch range of f0: 150-220 Hz, harmonics count:30(because max frequency about 4800Hz), harmony length: 0.1-0.2sec.
 
 ### Part 1.2
-* window type:
-* window size:
-* FFT size:
-* minimum f0:
-* maximum f0:
-* error threshold in f0 detection:
-* number of harmonics:
-* stochastic decimation factor:
+* window type:blackman
+* window size:2001
+* FFT size:4096
+* minimum f0:146
+* maximum f0:222
+* error threshold in f0 detection:5
+* number of harmonics:33
+* stochastic decimation factor:0.4
 
 speech-harmonic: [speech-harmonic.wav]()  
 speech-stochastic: [speech-stochastic.wav]()  
@@ -35,21 +35,20 @@ speech-reconstructed: [speech-reconstructed.wav]()
 ## Question 2. Obtain a good harmonic+stochastic analysis of a monophonic musical phrase 
 
 ### Part 2.1
-[selected sound from free sound:]()
-(describe why you choosed it.)
+I liked this sound and its melody is interesting. [Lucasgonze-Celebratedpolka-1](https://www.freesound.org/people/lucasgonze/sounds/90053/)
 
 ### Part 2.2
-(max magnitude(dB), pitch range that seems to be f0, assumption of harmonics count)
+Roughly, pitch range of f0: 100-200 Hz, harmonics count:50(because max frequency about 4800Hz), harmony length: 0.1-0.15sec.
 
 ### Part 2.3
-* window type:
-* window size:
-* FFT size:
-* minimum f0:
-* maximum f0:
-* error threshold in f0 detection:
-* number of harmonics:
-* stochastic decimation factor:
+* window type:blackman
+* window size:2101
+* FFT size:4096
+* minimum f0:103
+* maximum f0:212
+* error threshold in f0 detection:5
+* number of harmonics:46
+* stochastic decimation factor:0.2
 
 a7q2-harmonic: [a7q2-harmonic.wav]()  
 a7q2-stochastic: [a7q2-stochastic.wav]()  
