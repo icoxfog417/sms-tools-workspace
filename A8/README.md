@@ -15,13 +15,55 @@ For example a good array for a frequency stretching of a sound that has a durati
 
 ## Question 1. Obtain a good harmonic+stochastic analysis of a speech sound
 
-Write a short paragraph for every transformation, explaining what you wanted to obtain and explaining the transformations you did, 
-giving both the analysis and transformation parameter values (sufficiently detailed for the evaluator to be able to reproduce the analysis and transformation).  
-upload transformed sound up to 3.
+* transformation  
+The sound changes from the male voice to female's.  
+frequency scaling:lower on the male part and gradually changes to female.  
+time scaling: stretch on the male part and gradually changes to female.  
+
+* parameters
+ * window type:blackman
+ * window size:2001
+ * FFT size:4096
+ * threshold:-80
+ * minSineDur:0.1
+ * number of harmonics:33
+ * minimum f0:146
+ * maximum f0:222
+ * error threshold in f0 detection:5
+ * deviation of harmonic :0.01
+ * stochastic decimation factor:0.1
+ * frequency scaling:[0,0.5,0.48,0.6,0.5,0.9,0.52,1,1,1.4]
+ * frequency stretching:[0,1,0.5,1,1,1.01]
+ * timbre preservation:0
+ * time scaling:[0,0,0.48,0.4,0.5,0.5,0.52,0.6,0.9,0.8,1,1]
+
+* sound file
+[attach]()
 
 ## Question 2. Perform creative transformations with a sound of your choice
 
-Write a short paragraph for every transformation, explaining what you wanted to obtain and explaining the transformations you did, 
-giving both the analysis and transformation parameter values (sufficiently detailed for the evaluator to be able to reproduce the analysis and transformation).   
-upload transformed sound up to 3.
+[the original sound](https://www.freesound.org/people/padron/sounds/254806/)
 
+* transformation  
+Inversed the original sound and add stretch effect.  
+frequency scaling:inverse the musical scale.  
+frequency stretch:add stretching effect.  
+time scaling: inverse the rhythm.  
+
+* parameters
+ * window type:blackman
+ * window size:2001
+ * FFT size:4096
+ * threshold:-100
+ * minSineDur:0.1
+ * number of harmonics:20
+ * minimum f0:250
+ * maximum f0:500
+ * error threshold in f0 detection:7
+ * deviation of harmonic :0.001
+ * stochastic decimation factor:0.1
+ * frequency scaling:[0,0.5,0.8,2,0.9,1,1.4,2]
+ * frequency stretching:[0,0.5,0.8,0.8]
+ * timbre preservation:1
+ * time scaling:[0,0,0.8,1.6,0.9,1.7,1.4,2]
+ 
