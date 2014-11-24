@@ -35,7 +35,7 @@ speech-reconstructed: [speech-reconstructed.wav]()
 ## Question 2. Obtain a good harmonic+stochastic analysis of a monophonic musical phrase 
 
 ### Part 2.1
-I liked this sound and its melody is interesting. [Lucasgonze-Celebratedpolka-1](https://www.freesound.org/people/lucasgonze/sounds/90053/)
+The sound is from one instrument, and its melody is interesting. [Lucasgonze-Celebratedpolka-1](https://www.freesound.org/people/lucasgonze/sounds/90053/)
 
 ### Part 2.2
 Roughly, pitch range of f0: 100-200 Hz, harmonics count:50(because max frequency about 4800Hz), harmony length: 0.1-0.15sec.
