@@ -246,7 +246,8 @@ def fetchDataDetails(inputDir, descExt = '.json'):
   for path, dname, fnames  in os.walk(inputDir):
     for fname in fnames:
       if descExt in fname.lower():
-        remain, rname, cname, sname = path.split('/')[:-3], path.split('/')[-3], path.split('/')[-2], path.split('/')[-1]
+        path_elements = path.split(os.sep)
+        remain, rname, cname, sname = path_elements[:-3], path_elements[-3], path_elements[-2], path_elements[-1]
         if not dataDetails.has_key(cname):
           dataDetails[cname]={}
         fDict = json.load(open(os.path.join('/'.join(remain), rname, cname, sname, fname),'r'))
@@ -274,3 +275,8 @@ def eucDist(vec1, vec2):
   Computes the euclidean distance between two vectors
   """
   return np.sqrt(np.sum(np.power(np.array(vec1) - np.array(vec2), 2)))
+
+if __name__ == "__main__":
+  descriptorPairScatterPlot("freesound", descInput=(5,14), anotOn=1)
+  descriptorPairScatterPlot("freesound", descInput=(9,14), anotOn=1)
+
